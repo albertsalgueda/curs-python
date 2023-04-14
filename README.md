@@ -2,5 +2,11 @@
 
 # Contributors
  Oscar Manzaneda Pro
- Miquel Macau 
+
+ Miquel Macau Pro
+
+ Jordi Privat Pro
+
+ 
+ 
  
