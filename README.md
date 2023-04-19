@@ -25,5 +25,7 @@ TODO: Posar un mail de contacte per tal que us puguin exposar bugs i millores
  Jordi Privat Pro
 
  Manel Avalos
+
+ Armand Casadó
  
  
