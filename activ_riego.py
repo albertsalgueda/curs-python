@@ -1,4 +1,4 @@
-riego =  # entrada bool
+riego = True # entrada bool
 
 while True:
   if riego == True:
