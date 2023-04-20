@@ -1,15 +1,10 @@
-# Funció temporitzadora que faci un request de la funció en la que s'utilitzi amb el temps especificat en segons
+# Funció temporitzadora que faci un request de la funció en la que s'utilitzi amb el temps especificat en segons.
 
-from prova import temps_status
-
-pluja = temps_status("Ripoll")
-
-def temporitzador(funcio): # Primer argument nom de la funció i segon argument temps d'espera en segons
-    import requests
+def temporitzador(funcio,*args): # Per trucar la funció s'ha d'especificar el nom de la funció i l'arguments o arguments que necessita separat per coma
     from time import sleep
     while True:
-        funcio # És on llegirà la funció on es vol aplicar el temporitzador 
-        sleep(2) # El temps de descans en segons
-        return print(pluja)
-
-temporitzador(temps_status("Ripoll"))
+        try:
+            funcio(*args)
+            sleep(2)
+        except Exception as e:
+            print(f"Hi ha hagut un error >>>>> {e}")

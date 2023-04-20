@@ -1,12 +1,11 @@
-riego = True # entrada bool
+riego = False # entrada bool
 
 while True:
-  if riego == True:
-   print ("riego activado") 
+  if riego:
+   print ("Riego activado") 
   else:
-    print("riego desactivado")
+    print("Riego desactivado")
   break
-
 
 
 
