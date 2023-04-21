@@ -1,5 +1,5 @@
 import random
 
-sim_humitat=float(random.randint(30,100))
+def sim_humitat()
+ return float(random.randint(30,100))
 
-print(sim_humitat)
