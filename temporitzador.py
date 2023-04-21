@@ -1,7 +1,8 @@
+from time import sleep
+
 # Funció temporitzadora que faci un request de la funció en la que s'utilitzi amb el temps especificat en segons.
 
 def temporitzador(funcio,*args): # Per trucar la funció s'ha d'especificar el nom de la funció i l'arguments o arguments que necessita separat per coma
-    from time import sleep
     while True:
         try:
             funcio(*args)
