@@ -1,3 +1,6 @@
+import requests
+import json
+
 from temps_status import get_status
 from temporitzador import temporitzador
 from sim_humitat import sim_humitat
@@ -7,18 +10,31 @@ poble_ripoll = "42.19706849706395,2.191078679466587"
 poble_pau = "42.316218626549905, 3.116762888571179"
 poble_pluja = "42,18"
 
-poblacio, temp, humitat, presio, data, pluja, condicions = temporitzador(get_status, "42.316218626549905, 3.116762888571179")
 
-try:
-    if pluja > 0 or sim_humitat > 70:
-        riego = False
-        print("Desactivando riego....")
-            
+
+def get_rain(data):
+    try:
+        humitat_ard = data["humitat"]
+        fruit = data["fruit"]
+        status = data["status"]
+        ubi = data["ubi"]
+    except: 
+        return "bad request"
+    
+    #mirar poblacio
+
+    poblacio, temp, humitat, presio, data, pluja, condicions = temporitzador(get_status, "ubi")
+    #mirar api si plou
+
+    if pluja > 0 or humitat_ard >80:
+        status=0
+        return {"status": status}
+        
     else:
-        riego = True
-        print("Activando riego....")
-        temp_reg = "True, 3600"
-        temp_dia = "True, 86400"
+        status=1
+        return{"status":status}
+    
+    fruit= data.get("fruit, none)")
+    
+   
 
-except Exception as e:   
-    print("Hi ha hagut un error >>>>>", e)
