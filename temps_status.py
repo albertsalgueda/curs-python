@@ -1,7 +1,6 @@
-import requests
-import json
-
 def get_status(poble):
+    import requests
+    import json
     response = requests.get(f"http://api.weatherapi.com/v1/forecast.json?key=8e3a9372e503477ca0f210354231404&q={poble}&days=1&aqi=no&alerts=no")
 
 
@@ -15,9 +14,9 @@ def get_status(poble):
     condicions = response.json()["current"]["condition"]["text"]
 
     if pluja == 0:
-        print(f"No plou a {poblacio}")
+        return print(f"No plou a {poblacio}")
     else:
-        print(f"Hi ha una precipitació de: {pluja} (mm/h) en la poblaciò de:  · {poblacio} · ({pais})")
+        return print(f"Hi ha una precipitació de: {pluja} (mm/h) en la poblaciò de:  · {poblacio} · ({pais})")
        
         #print(f"Està a: {temp} graus centigrads")
         #print(f"i té una humitat del: {humitat} %")
@@ -25,7 +24,6 @@ def get_status(poble):
         #print(f"Mesura: {data}")
         #print(f"Hi ha una precipitació de: {pluja}")
         #print(f"Condicions Ambientals: {condicions}")
-    return poblacio, temp, humitat, presio, data, pluja, condicions
 
 
 
