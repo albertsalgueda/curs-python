@@ -1,11 +1,13 @@
-riego = False # entrada bool
+def riego():
+riego = 1 # entrada bool / tambien puede ser riego = strip(data)?
 
 while True:
   if riego:
-   print ("Riego activado") 
+   print ("riego activado") 
   else:
-    print("Riego desactivado")
+    print("riego desactivado")
   break
+return riego
 
 
 
