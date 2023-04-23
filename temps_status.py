@@ -18,20 +18,12 @@ def get_status(poble):
         print(f"Pluja 0=NO 1=Si: {pluja}")
         return int(pluja)
         
-    
     else:
        print(f"Hi ha una precipitació de: {pluja} (mm/h) en la poblaciò de:  · {poblacio} · ({pais})")
        pluja=1
        print(f"Pluja 0=NO 1=Si: {pluja}")
-       return pluja 
-        
-       
-        #print(f"Està a: {temp} graus centigrads")
-        #print(f"i té una humitat del: {humitat} %")
-        #print(f"i hi ha una presiò atmosfèrica de: {presio} mbars")
-        #print(f"Mesura: {data}")
-        #print(f"Hi ha una precipitació de: {pluja}")
-        #print(f"Condicions Ambientals: {condicions}")
+       return pluja
+   
 
 
 
