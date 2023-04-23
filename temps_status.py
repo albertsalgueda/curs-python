@@ -14,9 +14,17 @@ def get_status(poble):
     condicions = response.json()["current"]["condition"]["text"]
 
     if pluja == 0:
-        return print(f"No plou a {poblacio}")
+        print(f"No plou a {poblacio}")
+        print(f"Pluja 0=NO 1=Si: {pluja}")
+        return int(pluja)
+        
+    
     else:
-        return print(f"Hi ha una precipitació de: {pluja} (mm/h) en la poblaciò de:  · {poblacio} · ({pais})")
+       print(f"Hi ha una precipitació de: {pluja} (mm/h) en la poblaciò de:  · {poblacio} · ({pais})")
+       pluja=1
+       print(f"Pluja 0=NO 1=Si: {pluja}")
+       return pluja 
+        
        
         #print(f"Està a: {temp} graus centigrads")
         #print(f"i té una humitat del: {humitat} %")
