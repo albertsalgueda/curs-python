@@ -15,5 +15,5 @@ if ordre == "S":
 elif ordre == "N":
     SerialObj.write(b'N')    #transmit 'N' (8bit) to micro/Arduino
 
-
+print(ordre)
 SerialObj.close()      # Close the port

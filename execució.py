@@ -1,8 +1,8 @@
 import receive_data
-import send_data
+#import send_data
 import time
-import get_rain.py
-
+#import get_rain.py
+memoria_estat = 0
 
 def split_string(frase): ## Format de raw data => b'232;452;0\r\n'
 
@@ -10,7 +10,6 @@ def split_string(frase): ## Format de raw data => b'232;452;0\r\n'
     split_data = frase.split(";") ## Split de l'string en una llista [Data1, Data2, Data3]
     
     return split_data
-
 
 def data_construction(llista, poble, fruita): ## Format de la llista + dades
     var1 = str(int(llista[0])/10)
@@ -27,6 +26,27 @@ def data_construction(llista, poble, fruita): ## Format de la llista + dades
         "fruita":       var5}
     
     return data_dict
+
+def send_data(ordre):
+    import serial 
+    import time
+    
+    SerialObj = serial.Serial('/dev/ttyACM0') # COMxx  format on Windows
+                    # ttyUSBx format on Linux
+    SerialObj.baudrate = 115200  # set Baud rate to 9600
+    SerialObj.bytesize = 8   # Number of data bits = 8
+    SerialObj.parity  ='N'   # No parity
+    SerialObj.stopbits = 1   # Number of Stop bits = 1
+    time.sleep(3)
+
+    if ordre == "S":
+        SerialObj.write(b'S')    #transmit 'S' (8bit) to micro/Arduino
+    elif ordre == "N":
+        SerialObj.write(b'N')    #transmit 'N' (8bit) to micro/Arduino
+
+    print(ordre)
+
+    SerialObj.close()      # Close the port
 
 
 
@@ -65,19 +85,35 @@ while True:
     fruita = input("Entra la tipologia de conrreu: ")
 
     data_dict = data_construction(split_data,poble,fruita) # Crida de la funció per construir el diccionari de dades. 
+    print(data_dict)
 
-    memoria_estat = data_dict["status"]
+    #memoria_estat = data_dict["status"]
+    
+
 
     ################# Resposta de l'status #################
 
     #dict = get_rain(json)
     status = 1 #dict["status"]
     
-    if status != memoria_estat and status ==1: 
-        send_data.ordre = "S"
+     #if status != memoria_estat and status ==1: 
+         #send_data.ordre = "S"
 
-    elif status != memoria_estat and status == 0:
-        send_data.ordre = "N"
+     #elif status != memoria_estat and status == 0:
+         #send_data.ordre = "N"
+
+
+################# TEST FLIP FLOP STATUS #################
+
+    if status ==1 and memoria_estat%2 ==0: 
+        send_data(ordre = "S")
+
+    elif status ==1 and memoria_estat%2 != 0:
+        send_data(ordre = "N")
+
+    memoria_estat+=1
+    print(memoria_estat)
+
 
 
     time.sleep(20)
