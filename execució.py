@@ -1,4 +1,5 @@
 import receive_data
+import send_data
 import time
 import get_rain.py
 
@@ -30,7 +31,7 @@ def data_construction(llista, poble, fruita): ## Format de la llista + dades
 
 
 while True: 
-
+    
     ################# TIMER #################
 
     start_time = time.time() # Hora inici temporitzador
@@ -65,7 +66,27 @@ while True:
 
     data_dict = data_construction(split_data,poble,fruita) # Crida de la funció per construir el diccionari de dades. 
 
-    print(data_dict)
+    memoria_estat = data_dict["status"]
+
+    ################# Resposta de l'status #################
+
+    #dict = get_rain(json)
+    status = 1 #dict["status"]
+    
+    if status != memoria_estat and status ==1: 
+        send_data.ordre = "S"
+
+    elif status != memoria_estat and status == 0:
+        send_data.ordre = "N"
+
+
+    time.sleep(20)
+
+    
+
+
+
+
 
 
 
