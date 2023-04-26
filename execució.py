@@ -1,8 +1,10 @@
 import receive_data
 #import send_data
 import time
-#import get_rain.py
+from get_rain import get_rain
+
 memoria_estat = 0
+freq = 5
 
 def split_string(frase): ## Format de raw data => b'232;452;0\r\n'
 
@@ -22,8 +24,8 @@ def data_construction(llista, poble, fruita): ## Format de la llista + dades
         "temperatura":  var1,
         "humitat":      var2,
         "status":       var3,
-        "poble":        var4,
-        "fruita":       var5}
+        "ubi":        var4,
+        "fruit":       var5}
     
     return data_dict
 
@@ -48,6 +50,9 @@ def send_data(ordre):
 
     SerialObj.close()      # Close the port
 
+
+poble =input("Entra la teva ubicació: ")
+fruita = input("Entra la tipologia de conrreu: ")
 
 
 while True: 
@@ -81,42 +86,46 @@ while True:
 
     ################# Construcció del diccionari #################
 
-    poble =input("Entra la teva ubicació: ")
-    fruita = input("Entra la tipologia de conrreu: ")
+ 
 
     data_dict = data_construction(split_data,poble,fruita) # Crida de la funció per construir el diccionari de dades. 
     print(data_dict)
 
-    #memoria_estat = data_dict["status"]
+    memoria_estat = data_dict["status"]
     
 
 
     ################# Resposta de l'status #################
 
-    #dict = get_rain(json)
-    status = 1 #dict["status"]
     
-     #if status != memoria_estat and status ==1: 
-         #send_data.ordre = "S"
+    response = get_rain(data_dict)
+    status=int(response["status"])
 
-     #elif status != memoria_estat and status == 0:
-         #send_data.ordre = "N"
+    
+    
+    if status != memoria_estat and status ==1: 
+        send_data.ordre = "S"
+        print("#### REGANT ####")
+
+    elif status != memoria_estat and status == 0:
+        send_data.ordre = "N"
+        print("#### NO REGANT ####")
 
 
 ################# TEST FLIP FLOP STATUS #################
 
-    if status ==1 and memoria_estat%2 ==0: 
-        send_data(ordre = "S")
+   # if status ==1 and memoria_estat%2 ==0: 
+        #send_data(ordre = "S")
 
-    elif status ==1 and memoria_estat%2 != 0:
-        send_data(ordre = "N")
+    #elif status ==1 and memoria_estat%2 != 0:
+        #send_data(ordre = "N")
 
-    memoria_estat+=1
-    print(memoria_estat)
+    #memoria_estat+=1
+    #print(memoria_estat)
 
 
 
-    time.sleep(20)
+    time.sleep(freq)
 
     
 
